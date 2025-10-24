@@ -1,0 +1,31 @@
+name: Basic CI Pipeline
+
+# 1. Trigger this workflow on every push to the 'main' branch
+on:
+  push:
+    branches: [ "main" ]
+
+# 2. Define the jobs to run
+jobs:
+  # Job 1: Build and Test
+  build-and-test:
+    runs-on: ubuntu-latest # Use a Linux virtual machine
+
+    steps:
+      # Step 1: Check out the repository code
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      # Step 2: Simulate a build step
+      - name: Simulate Build
+        run: echo "Building the website..."
+
+      # Step 3: Run a simple test (check if 'Hello' is in the file)
+      - name: Run a simple test
+        run: |
+          if grep -q "Hello" index.html; then
+            echo "Test PASSED: 'Hello' string found."
+          else
+            echo "Test FAILED: 'Hello' string not found."
+            exit 1
+          fi
